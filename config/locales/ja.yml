@@ -1,0 +1,21 @@
+ja:
+  model:
+    url_queue:
+      columns:
+        hashkey: ハッシュ
+        url: URL
+        crawler: クローラ
+        scraper: スクレイパ
+        info: 
+        crawl_status: ステータス
+        priority: 優先度
+        failed_count: クロール失敗数
+      attributes:
+        crawl_status:
+          registered: 登録済み
+          crawling: クロール中
+          crawled: クロール済み
+  view:
+    queues:
+      do_crawl: クロールする
+      process: 処理

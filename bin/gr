@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+def usage
+  puts <<-EOD
+Usage:
+  gr [COMMAND NAME] [OPTIONS] [ARGS]
+
+Commands:
+  crawl  - Start to crawl urls specified from args
+  scrape - Do scraping contents from crawlings
+  EOD
+end
+
+command = ARGV.shift
+usage or return unless command
+
+require File.expand_path('../config/application', __dir__)
+require_relative '../config/boot'
+Rails.application.require_environment!
+
+begin
+  task = "Tasks::#{command.camelize}".constantize.new
+rescue NameError => e
+  usage
+end
+
+begin
+  task.start(ARGV)
+rescue Exception => e
+  puts e
+  puts e.backtrace.join("\n")
+end
